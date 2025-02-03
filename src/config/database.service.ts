@@ -1,4 +1,4 @@
-import { AppDataSource } from './typeorm.config';
+import { AppDataSource } from './ormconfig';
 
 export class DatabaseService {
   static async initialize() {
