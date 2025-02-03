@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node", // import from node_modules
+        "resolveJsonModule": true, // import JSON files
+        "baseUrl": "./src",
+        "skipLibCheck": true,
+        "experimentalDecorators": true, // using Decorators
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": true
+
+    }
+}
