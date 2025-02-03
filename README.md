@@ -7,6 +7,7 @@ git remote add origin https://github.com/qhnam/express-core.git
 ```
 
 2. Install node modules
+
 ```sh
 npm install
 ```
