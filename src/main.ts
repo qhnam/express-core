@@ -1,6 +1,8 @@
 import express from 'express';
 import { DatabaseService } from './config/database.service';
 import { loggerMiddleware } from './common/middlewares/logger.middleware';
+import { AppModule } from './modules/app.module';
+import { errorHandlerMiddleware } from './common/middlewares/error-handler.middleware';
 
 const bootstrap = async () => {
   const app = express();
@@ -10,6 +12,11 @@ const bootstrap = async () => {
 
   app.use(express.json());
   app.use(loggerMiddleware);
+
+  const appModule = new AppModule(app);
+  appModule.init();
+
+  app.use(errorHandlerMiddleware);
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {

@@ -4,3 +4,5 @@ enum USER_STATUS {
   BLOCK = 3,
   DELETED = 4,
 }
+
+export { USER_STATUS };
