@@ -1,4 +1,4 @@
-import { asyncHandler } from '../../utils/asynHandller';
+import { asyncHandler } from '../utils/asyn-handller.utils';
 
 function Route(
   method: 'get' | 'post' | 'put' | 'patch' | 'delete',

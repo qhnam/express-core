@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { AppDataSource } from '../../../config/ormconfig';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { HashUtil } from '../../../utils/hash.utils';
+import { HashUtil } from '../../../common/utils/hash.utils';
 import { USER_STATUS, USER_STATUS_CODE } from '../user.constant';
 import { ErrorException } from '../../../config/error-exception';
 
