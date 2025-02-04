@@ -4,6 +4,7 @@ import { DatabaseService } from './config/database.service';
 import { loggerMiddleware } from './common/middlewares/logger.middleware';
 import { AppModule } from './modules/app.module';
 import { errorHandlerMiddleware } from './common/middlewares/error-handler.middleware';
+import { ENV } from './config/environment';
 
 const bootstrap = async () => {
   const app = express();
@@ -19,9 +20,8 @@ const bootstrap = async () => {
 
   app.use(errorHandlerMiddleware);
 
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  app.listen(ENV.PORT, () => {
+    console.log(`Server is running on http://localhost:${ENV.PORT}`);
   });
 
   app.get('/test', (req, res) => {

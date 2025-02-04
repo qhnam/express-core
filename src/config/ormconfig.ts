@@ -1,15 +1,14 @@
 import { join } from 'path';
 import { DataSource } from 'typeorm';
-import dotenv from 'dotenv';
-dotenv.config();
+import { ENV } from './environment';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
-  host: process.env.DB_HOST,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT) || 3306,
+  host: ENV.DB_HOST,
+  username: ENV.DB_USER,
+  password: ENV.DB_PASSWORD,
+  database: ENV.DB_NAME,
+  port: ENV.DB_PORT,
   synchronize: false,
   logging: true,
   entities: [join(__dirname, '../modules/**/entities/*.entity{.ts,.js}')],
