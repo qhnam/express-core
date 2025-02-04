@@ -20,8 +20,8 @@ function Route(
       // handler: asyncHandler(descriptor.value),
       // handler: descriptor.value,
       handler: function (req: any, res: any, next: any) {
-        // ✅ Bind `this` trước khi truyền vào asyncHandler
         const boundHandler = descriptor.value.bind(this);
+
         return asyncHandler(boundHandler)(req, res, next);
       },
       middleware: middlewares,

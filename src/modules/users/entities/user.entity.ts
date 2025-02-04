@@ -1,7 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
 import { USER_STATUS } from '../user.constant';
+import { DATABASE_NAME } from '../../../common/entities/database-name';
 
+@Entity(DATABASE_NAME.USERS)
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
@@ -15,9 +17,9 @@ export class UserEntity extends BaseEntity {
   @Column({ name: 'fullname' })
   fullname: string;
 
-  @Column({ name: 'password' })
+  @Column({ name: 'password', select: false })
   password: string;
 
-  @Column({ name: 'status', type: 'enum' })
+  @Column({ name: 'status', type: 'enum', enum: USER_STATUS })
   status: USER_STATUS;
 }

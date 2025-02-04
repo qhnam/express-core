@@ -5,7 +5,7 @@ import { UserController } from './controllers/user.controller';
 export class UserModule {
   constructor(private app: Application) {}
 
-  init() {
-    registerControllers(this.app, [UserController]);
-  }
+  // init() {
+  //   registerControllers(this.app, [UserController]);
+  // }
 }

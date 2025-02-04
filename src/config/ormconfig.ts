@@ -13,6 +13,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: true,
   entities: [join(__dirname, '../modules/**/entities/*.entity{.ts,.js}')],
+  // entities: [UserEntity],
   migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
   subscribers: [],
 });

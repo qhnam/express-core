@@ -12,16 +12,13 @@ export class UserController {
     this.userService = new UserService();
   }
 
-  @Get('/')
-  getUsers(req: Request, res: Response) {
-    return res.json({
-      a: 1,
-    });
+  @Get('/:id')
+  async getUsers(req: Request, res: Response) {
+    return res.json(await this.userService.findOne(Number(req.params.id)));
   }
 
   @Post('/', [validationMiddleware(CreateUserDto)])
   async postUser(req: Request, res: Response) {
-    await this.userService.create(req.body);
-    return res.json(req.body);
+    return res.json(await this.userService.create(req.body));
   }
 }

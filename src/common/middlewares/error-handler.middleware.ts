@@ -12,6 +12,7 @@ export const errorHandlerMiddleware = (
   if (exception instanceof ErrorException) {
     errorException = exception;
   } else {
+    console.log(exception);
     errorException = new ErrorException(
       'AN_UNKNOWN_ERROR|500',
       'An unknown error'
