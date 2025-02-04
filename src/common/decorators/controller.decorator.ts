@@ -1,6 +1,5 @@
 import express from 'express';
-
-const Router = express.Router();
+import { ENV } from '../../config/environment';
 
 /**
  * @Controller(prefix)
@@ -8,7 +7,7 @@ const Router = express.Router();
  */
 export function Controller(prefix: string): ClassDecorator {
   return function (target: any) {
-    target.prototype.prefix = prefix;
-    target.prototype.router = Router;
+    target.prototype.prefix = `${ENV.API_PREFIX}/${prefix.replace(/^\/+/, '')}`;
+    target.prototype.router = express.Router();
   };
 }

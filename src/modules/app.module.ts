@@ -7,9 +7,9 @@ export class AppModule {
   constructor(private app: Application) {}
 
   init() {
-    new UserModule(this.app);
+    new UserModule(this.app).init();
 
     // Register all controller
-    registerControllers(this.app, [UserController]);
+    // registerControllers(this.app, [UserController]);
   }
 }

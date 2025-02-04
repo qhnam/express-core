@@ -16,4 +16,6 @@ export const ENV = {
 
   // JWT
   SECRET_KEY: process.env.SECRET_KEY,
+  JWT_LIFE_TIME_ACCESS: process.env.JWT_LIFE_TIME_ACCESS,
+  JWT_LIFE_TIME_REFRESH: process.env.JWT_LIFE_TIME_REFRESH,
 };

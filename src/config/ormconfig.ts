@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   database: ENV.DB_NAME,
   port: ENV.DB_PORT,
   synchronize: false,
-  logging: true,
+  logging: false,
   entities: [join(__dirname, '../modules/**/entities/*.entity{.ts,.js}')],
   // entities: [UserEntity],
   migrations: [join(__dirname, '../migrations/*{.ts,.js}')],

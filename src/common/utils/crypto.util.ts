@@ -1,7 +1,8 @@
 import crypto from 'crypto';
+import { ENV } from '../../config/environment';
 
-const generateUserSecretKey = (userId: number) => {
-  const baseSecret = process.env.GLOBAL_SECRET_KEY as string;
+const generateUserSecretKey = (userId: string | number) => {
+  const baseSecret = ENV.SECRET_KEY as string;
   return crypto
     .createHmac('sha256', baseSecret)
     .update(String(userId))

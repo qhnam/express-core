@@ -4,7 +4,7 @@ import { validationMiddleware } from '../../../common/middlewares/validation.mid
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserService } from '../services/user.service';
 
-@Controller('/api/users')
+@Controller('/users')
 export class UserController {
   private userService: UserService;
 
