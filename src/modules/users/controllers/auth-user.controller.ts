@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { validationMiddleware } from '../../../common/middlewares/validation.middleware';
 import { SignInUserDto } from '../dtos/sign-in-user.dto';
 import { CustomRequest } from '../../../common/interfaces/request.interface';
+import { RefreshTokenDto } from '../dtos/refresh-token.dto';
 
 @Controller('auth')
 export class AuthUserController {
@@ -16,6 +17,11 @@ export class AuthUserController {
   @Post('/sign-in', [validationMiddleware(SignInUserDto)])
   async signIn(req: Request, res: Response) {
     return res.json(await this.userService.signIn(req.body));
+  }
+
+  @Post('/refresh-token', [validationMiddleware(RefreshTokenDto)])
+  async refreshToken(req: Request, res: Response) {
+    return res.json(await this.userService.refreshToken(req.body));
   }
 
   @Get('/me')

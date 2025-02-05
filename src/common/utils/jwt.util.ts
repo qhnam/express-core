@@ -1,10 +1,9 @@
+import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { generateUserSecretKey } from './crypto.util';
 import { ENV } from '../../config/environment';
-import { NextFunction, Request, Response } from 'express';
 import { ErrorException } from '../../config/error-exception';
-import crypto from 'crypto';
 import { CustomRequest } from '../interfaces/request.interface';
+import { generateUserSecretKey } from './crypto.util';
 
 const generateToken = (userId: number) => {
   const userSecretKey = generateUserSecretKey(userId);

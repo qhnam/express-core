@@ -7,6 +7,10 @@ import { USER_STATUS, USER_STATUS_CODE } from '../user.constant';
 import { ErrorException } from '../../../config/error-exception';
 import { SignInUserDto } from '../dtos/sign-in-user.dto';
 import { generateToken } from '../../../common/utils/jwt.util';
+import { RefreshTokenDto } from '../dtos/refresh-token.dto';
+import jwt from 'jsonwebtoken';
+import { generateUserSecretKey } from '../../../common/utils/crypto.util';
+import { ENV } from '../../../config/environment';
 
 export class UserService {
   private readonly userRepo: Repository<UserEntity>;
@@ -98,6 +102,58 @@ export class UserService {
       refreshToken,
       user: returnUser,
     };
+  }
+
+  async refreshToken(dto: RefreshTokenDto) {
+    const decoded = jwt.decode(dto.refreshToken) as {
+      userId: number;
+      exp: number;
+    };
+
+    if (!decoded || !decoded.userId) {
+      throw new ErrorException(
+        'INVALID_REFRESH_TOKEN|403',
+        'Invalid refresh token'
+      );
+    }
+
+    if (decoded.exp && decoded.exp < Date.now() / 1000) {
+      throw new ErrorException(
+        'REFRESH_TOKEN_EXPIRED|403',
+        'Refresh token expired'
+      );
+    }
+
+    const userSecretKey = generateUserSecretKey(decoded.userId);
+
+    try {
+      const verifiedUser = jwt.verify(dto.refreshToken, userSecretKey) as {
+        userId: string;
+      };
+
+      const newAccessToken = jwt.sign(
+        { userId: verifiedUser.userId },
+        userSecretKey,
+        {
+          expiresIn: ENV.JWT_LIFE_TIME_ACCESS as any,
+        }
+      );
+
+      const newRefreshToken = jwt.sign(
+        { userId: verifiedUser.userId },
+        userSecretKey,
+        {
+          expiresIn: ENV.JWT_LIFE_TIME_REFRESH as any,
+        }
+      );
+
+      return { accessToken: newAccessToken, refreshToken: newRefreshToken };
+    } catch (err) {
+      throw new ErrorException(
+        'INVALID_REFRESH_TOKEN|403',
+        'Invalid refresh token'
+      );
+    }
   }
 
   async getMe(id: number) {
